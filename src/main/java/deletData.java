@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -6,10 +5,10 @@ import java.util.Scanner;
 
 import com.mysql.jdbc.Statement;
 
-public class dataManagment {
+public class deletData {
 
-	//public static void updateById() {
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		String url = "jdbc:mysql://localhost:3306/dataapi";
 
 		// Username and password to access DB
@@ -21,15 +20,8 @@ public class dataManagment {
 		System.out.println("Enter id: ");
 		Integer idInput = scanner.nextInt();
 
-		System.out.println("Enter alpha_two_code: ");
-		String alpha_two_codeInput = scanner.next();
-
-		
-
-		String sql2 = "UPDATE University SET alpha_two_code='" + alpha_two_codeInput 
-				+ "' WHERE id='" + idInput + "'";
-		
-		Connection con = null;
+		String sql2 = "delete from University where id ='"+idInput + "'";
+		Connection con1 = null;
 
 		try {
 
@@ -38,13 +30,11 @@ public class dataManagment {
 			DriverManager.registerDriver(driver);
 
 			// Reference to connection interface
-			con = DriverManager.getConnection(url, user, pass);
+			con1 = DriverManager.getConnection(url, user, pass);
 
 			// Creating a statement
-			java.sql.Statement st = con.createStatement();
+			Statement st = (Statement) con1.createStatement();
 			int m = st.executeUpdate(sql2);
-
-			
 
 		}
 
@@ -53,8 +43,7 @@ public class dataManagment {
 			// Display message when exceptions occurs
 			System.err.println(ex);
 		}
+
 	}
-	
-	
 
 }
